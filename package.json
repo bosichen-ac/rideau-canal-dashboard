@@ -1,0 +1,14 @@
+{
+  "name": "rideau-canal-dashboard",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix client\" \"node server/server.js\"",
+    "install:client": "npm install --prefix client",
+    "install:server": "npm install --prefix server",
+    "build": "npm run install:client && npm run build --prefix client",
+    "start": "node server/server.js"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
