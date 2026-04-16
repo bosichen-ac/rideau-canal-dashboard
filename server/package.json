@@ -1,5 +1,5 @@
 {
-  "name": "rideau-canal-dashboard-server",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -8,19 +8,12 @@
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bosichen-ac/rideau-canal-dashboard.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/bosichen-ac/rideau-canal-dashboard/issues"
-  },
-  "homepage": "https://github.com/bosichen-ac/rideau-canal-dashboard#readme",
   "dependencies": {
+    "@azure/cosmos": "^4.9.2",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1"
