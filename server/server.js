@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 const { CosmosClient } = require("@azure/cosmos");
+
 
 const app = express();
 app.use(cors());
@@ -14,6 +16,12 @@ const client = new CosmosClient({
 const database = client.database(process.env.COSMOS_DATABASE);
 const container = database.container(process.env.COSMOS_CONTAINER);
 
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
+
 
 app.get("/", (req, res) => {
   res.send("API...");
@@ -24,9 +32,9 @@ app.get("/api/analytics", async (req, res) => {
     const query = {
       query: "SELECT * FROM c ORDER BY c.windowEnd DESC"
     };
-
+    
     const { resources } = await container.items.query(query).fetchAll();
-
+    
     res.json(resources);
   } catch (err) {
     console.log(err);
