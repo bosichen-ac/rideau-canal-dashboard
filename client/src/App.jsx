@@ -35,11 +35,11 @@ function App() {
       const res = await fetch("/api/analytics")
       const data = await res.json()
       setData(data)
+      setErrMsg("")
     } catch (err) {
       setErrMsg(err)
     } finally {
       setLoading(false)
-      setErrMsg("")
     }
   }
 
@@ -81,11 +81,17 @@ function App() {
 
   const getDowsLakeData = (prop) => {
     return {
-      labels: dataLastHourByLocation["Dow's Lake"].map(d => new Date(d.windowEnd).toLocaleTimeString()),
+      labels: dataLastHourByLocation["Dow's Lake"]
+        .slice()
+        .reverse()
+        .map(d => new Date(d.windowEnd).toLocaleTimeString()),
       datasets: [
         {
           label: prop,
-          data: dataLastHourByLocation["Dow's Lake"].map(e => e[prop]),
+          data: dataLastHourByLocation["Dow's Lake"]
+            .slice()
+            .reverse()
+            .map(e => e[prop]),
         }
       ]
     }
@@ -93,11 +99,17 @@ function App() {
 
   const getFifthAveData = (prop) => {
     return {
-      labels: dataLastHourByLocation["Fifth Avenue"].map(d => new Date(d.windowEnd).toLocaleTimeString()),
+      labels: dataLastHourByLocation["Fifth Avenue"]
+        .slice()
+        .reverse()
+        .map(d => new Date(d.windowEnd).toLocaleTimeString()),
       datasets: [
         {
           label: prop,
-          data: dataLastHourByLocation["Fifth Avenue"].map(e => e[prop]),
+          data: dataLastHourByLocation["Fifth Avenue"]
+            .slice()
+            .reverse()
+            .map(e => e[prop]),
         }
       ]
     }
@@ -106,11 +118,17 @@ function App() {
 
   const getNACData = (prop) => {
     return {
-      labels: dataLastHourByLocation["NAC"].map(d => new Date(d.windowEnd).toLocaleTimeString()),
+      labels: dataLastHourByLocation["NAC"]
+        .slice()
+        .reverse()
+        .map(d => new Date(d.windowEnd).toLocaleTimeString()),
       datasets: [
         {
           label: prop,
-          data: dataLastHourByLocation["NAC"].map(e => e[prop]),
+          data: dataLastHourByLocation["NAC"]
+            .slice()
+            .reverse()
+            .map(e => e[prop]),
         }
       ]
     }
