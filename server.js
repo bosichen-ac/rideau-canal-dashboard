@@ -16,7 +16,7 @@ const client = new CosmosClient({
 const database = client.database(process.env.COSMOS_DATABASE);
 const container = database.container(process.env.COSMOS_CONTAINER);
 
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "/client/dist")));
 
 app.get("/api/analytics", async (req, res) => {
   try {
@@ -33,9 +33,9 @@ app.get("/api/analytics", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  res.send("API...");
-});
+// app.get("/", (req, res) => {
+//   res.send("API...");
+// });
 
 app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "client/dist/index.html"));
