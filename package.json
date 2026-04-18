@@ -2,14 +2,18 @@
   "name": "rideau-canal-dashboard",
   "version": "1.0.0",
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix client\" \"node server/server.js\"",
-    "install:client": "npm install --prefix client",
-    "install:server": "npm install --prefix server",
-    "build": "npm run install:client && npm run build --prefix client",
-    "postinstall": "npm install --prefix server",
-    "start": "node server/server.js"
+    "dev": "concurrently \"npm run dev --prefix client\" \"node server.js\"",
+    "build": "npm run build --prefix client",
+    "start": "node server.js"
   },
   "dependencies": {
-    "concurrently": "^9.2.1"
+    "@azure/cosmos": "^4.9.2",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

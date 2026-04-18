@@ -26,7 +26,6 @@ ChartJS.register(
 function App() {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState([])
-  const [errMsg, setErrMsg] = useState("")
   
   
   const fetchData = async () => {
@@ -35,9 +34,8 @@ function App() {
       const res = await fetch("/api/analytics")
       const data = await res.json()
       setData(data)
-      setErrMsg("")
     } catch (err) {
-      setErrMsg(err)
+      console.error(err)
     } finally {
       setLoading(false)
     }
@@ -136,8 +134,8 @@ function App() {
 
 
   const overallStat = () => {
-    if (data.some(d => d.safetyStatus === "Unsafe")) return "Unsafe"
-    if (data.some(d => d.safetyStatus === "Caution")) return "Caution"
+    if (dataLastHour.some(d => d.safetyStatus === "Unsafe")) return "Unsafe"
+    if (dataLastHour.some(d => d.safetyStatus === "Caution")) return "Caution"
     return "Safe"
   }
 
@@ -148,15 +146,6 @@ function App() {
       return "orange"
     }
     return "red"
-  }
-
-  if (errMsg) {
-    return (
-      <main>
-        <h1>Rideau Canal Skateway Dashboard</h1>
-        <h2>Error: {errMsg}</h2>
-      </main>
-    )
   }
 
 

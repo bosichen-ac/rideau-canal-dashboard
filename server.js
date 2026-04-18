@@ -18,14 +18,10 @@ const container = database.container(process.env.COSMOS_CONTAINER);
 
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-app.get("/", (req, res) => {
-  res.send("API...");
-});
-
 app.get("/api/analytics", async (req, res) => {
   try {
     const query = {
-      query: "SELECT * FROM c ORDER BY c.windowEnd DESC"
+      query: "SELECT TOP 50 * FROM c ORDER BY c.windowEnd DESC"
     };
     
     const { resources } = await container.items.query(query).fetchAll();
@@ -37,8 +33,12 @@ app.get("/api/analytics", async (req, res) => {
   }
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+app.get("/", (req, res) => {
+  res.send("API...");
+});
+
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "client/dist/index.html"));
 });
 
 const PORT = process.env.PORT || 3000;

@@ -28,3 +28,5 @@ Thumbs.db
 
 # Optional package lock safety note (keep if needed)
 # package-lock.json  (usually DO NOT ignore this unless instructed)
+
+server/*
