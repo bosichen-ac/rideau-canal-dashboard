@@ -18,11 +18,6 @@ const container = database.container(process.env.COSMOS_CONTAINER);
 
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-});
-
-
 app.get("/", (req, res) => {
   res.send("API...");
 });
@@ -40,6 +35,10 @@ app.get("/api/analytics", async (req, res) => {
     console.log(err);
     res.status(500).send("Error fetching data");
   }
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 const PORT = process.env.PORT || 3000;
